@@ -522,6 +522,15 @@ along with this program.  If not, see < http://www.gnu.org/licenses/ >.
                 this.getTags = function () {
                     return tags.assignedTags;
                 };
+                this.addTag = function () {
+                    tags = addTag(this, $.trim(ui.item.value), tags, opts.sortTags);
+                    if (opts.updateURL !== '' && opts.autoUpdate) {
+                        saveTags(tags, opts, tagContainer.id);
+                    }
+                    if (typeof(opts.afterAdd) == "function") {
+                        opts.afterAdd.call(this, newTag);
+                    }
+                };
                 return 1;
             });
         }
